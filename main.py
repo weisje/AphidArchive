@@ -13,18 +13,20 @@ def timeConvert(epochTime):
     return outputTime
 
 def main():
-    inputFilePath = #Insert path to be crawled as quoted string(26/08/2021 -JW)
-    outputFileName = #Insert filename to have data outputted to(26/08/2021 -JW)
-    outputFilePath = #Insert filepath without filename for data to be outputted to(26/08/2021 -JW)
+    inputFilePath = #Insert filepath to be crawled(i.e. "C:\\Users\\alice\\Documents") (26/08/2021 -JW)
+    outputFileName = #Insert filename to output results with file as a .csv file(i.e. "outputFile.csv") (26/08/2021 -JW)
+    outputFilePath = #Insert filepath to output results without the filename (i.e. "C:\\Users\\admin\\Documents\\AuditFiles") (26/08/2021 -JW)
+    checkInRange = 500 #Insert number to modulo off of the counter that tells the program how many enteries should be put in before it "Checks in" (26/08/2021 -JW)
     outputFullFile = outputFilePath + outputFileName
     counter = 0
-
     editMode = "a"
-
     fileOpen = open(outputFullFile, editMode)
 
+    print("Crawl Starting")
+    startTime = datetime.datetime.now()
+    print("Start Time: " + str(startTime))
     for (dirpath, dirname, filenames) in os.walk(inputFilePath):
-        if(counter%500 == 0):
+        if(counter%checkInRange == 0):
             print(counter)
         try:
             for f in filenames:
@@ -44,6 +46,12 @@ def main():
         except:
             continue
         counter +=1
+    endTime = datetime.datetime.now()
+    executeTime = endTime - startTime
+    print("Crawl Finished! %i Entries added to %s" %(counter, outputFullFile))
+    print("Start Time: " + str(startTime))
+    print("End Time: " + str(endTime))
+    print("Time to Complete: " + str(executeTime))
 
 if __name__ == '__main__':
     main()
