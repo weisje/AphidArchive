@@ -1,4 +1,3 @@
-#(26/08/2021 -JW)
 #**IMPORT BLOCK**(26/08/2021 -JW)
 import os
 import datetime
