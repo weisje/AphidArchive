@@ -1,31 +1,51 @@
-#**IMPORT BLOCK**(26/08/2021 -JW)
+#(2022/04/18 -JW)
+#**IMPORT BLOCK**(2022/04/18 -JW)
 import os
 import datetime
+import platform
 
 #**LAMBDA BLOCK**(26/08/2021 -JW)
 pathLambda = lambda varA, varB : os.path.join(varA, varB)
 
-#**FUNCTION BLOCK**(26/08/2021 -JW)
+#**FUNCTION BLOCK**(2022/04/18 -JW)
 def timeConvert(epochTime):
     inputTime = epochTime
     outputTime = datetime.datetime.fromtimestamp(inputTime)
     return outputTime
 
+#Function for determining the type of system/OS that is running on the target (2022/04/18 -JW)
+def systemCheck():
+    systemName = platform.system()
+    if(systemName == 'Linux'):
+        print("Linux System")
+        linuxFileHandler()
+    else:
+        print("Non-Linux System")
+        windowsFileHandler()
+
+#Primary function for handling Linux systems when they are identified (2022/04/18 -JW)
+def linuxFileHandler():
+    print("Files being handled by linuxFileHandler()")
+    exit()
+
+def windowsFileHandler():
+    print("Files being handled by windowsFileHandler()")
+    exit()
+
 def main():
-    inputFilePath = #Insert filepath to be crawled(i.e. "C:\\Users\\alice\\Documents") (26/08/2021 -JW)
-    outputFileName = #Insert filename to output results with file as a .csv file(i.e. "outputFile.csv") (26/08/2021 -JW)
-    outputFilePath = #Insert filepath to output results without the filename (i.e. "C:\\Users\\admin\\Documents\\AuditFiles") (26/08/2021 -JW)
-    checkInRange = 500 #Insert number to modulo off of the counter that tells the program how many enteries should be put in before it "Checks in" (26/08/2021 -JW)
+    systemCheck()
+    inputFilePath = ""#Insert path to be crawled as quoted string(26/08/2021 -JW)
+    outputFileName = ""#Insert filename to have data outputted to(26/08/2021 -JW)
+    outputFilePath = ""#Insert filepath without filename for data to be outputted to(26/08/2021 -JW)
     outputFullFile = outputFilePath + outputFileName
     counter = 0
+
     editMode = "a"
+
     fileOpen = open(outputFullFile, editMode)
 
-    print("Crawl Starting")
-    startTime = datetime.datetime.now()
-    print("Start Time: " + str(startTime))
     for (dirpath, dirname, filenames) in os.walk(inputFilePath):
-        if(counter%checkInRange == 0):
+        if(counter%500 == 0):
             print(counter)
         try:
             for f in filenames:
@@ -45,12 +65,6 @@ def main():
         except:
             continue
         counter +=1
-    endTime = datetime.datetime.now()
-    executeTime = endTime - startTime
-    print("Crawl Finished! %i Entries added to %s" %(counter, outputFullFile))
-    print("Start Time: " + str(startTime))
-    print("End Time: " + str(endTime))
-    print("Time to Complete: " + str(executeTime))
 
 if __name__ == '__main__':
     main()
