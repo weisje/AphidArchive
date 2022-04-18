@@ -1,21 +1,42 @@
-#(26/08/2021 -JW)
-#**IMPORT BLOCK**(26/08/2021 -JW)
+#(2022/04/18 -JW)
+#**IMPORT BLOCK**(2022/04/18 -JW)
 import os
 import datetime
+import platform
 
 #**LAMBDA BLOCK**(26/08/2021 -JW)
 pathLambda = lambda varA, varB : os.path.join(varA, varB)
 
-#**FUNCTION BLOCK**(26/08/2021 -JW)
+#**FUNCTION BLOCK**(2022/04/18 -JW)
 def timeConvert(epochTime):
     inputTime = epochTime
     outputTime = datetime.datetime.fromtimestamp(inputTime)
     return outputTime
 
+#Function for determining the type of system/OS that is running on the target (2022/04/18 -JW)
+def systemCheck():
+    systemName = platform.system()
+    if(systemName == 'Linux'):
+        print("Linux System")
+        linuxFileHandler()
+    else:
+        print("Non-Linux System")
+        windowsFileHandler()
+
+#Primary function for handling Linux systems when they are identified (2022/04/18 -JW)
+def linuxFileHandler():
+    print("Files being handled by linuxFileHandler()")
+    exit()
+
+def windowsFileHandler():
+    print("Files being handled by windowsFileHandler()")
+    exit()
+
 def main():
-    inputFilePath = #Insert path to be crawled as quoted string(26/08/2021 -JW)
-    outputFileName = #Insert filename to have data outputted to(26/08/2021 -JW)
-    outputFilePath = #Insert filepath without filename for data to be outputted to(26/08/2021 -JW)
+    systemCheck()
+    inputFilePath = ""#Insert path to be crawled as quoted string(26/08/2021 -JW)
+    outputFileName = ""#Insert filename to have data outputted to(26/08/2021 -JW)
+    outputFilePath = ""#Insert filepath without filename for data to be outputted to(26/08/2021 -JW)
     outputFullFile = outputFilePath + outputFileName
     counter = 0
 
